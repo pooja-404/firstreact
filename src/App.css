@@ -1,0 +1,17 @@
+body {
+  margin: 10px !important;
+  display: flow-root !important;
+  place-items: none !important;
+  min-width: none !important;
+  min-height: none !important;
+  background-color: azure;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark; 
+   color: black !important;
+ 
+}
