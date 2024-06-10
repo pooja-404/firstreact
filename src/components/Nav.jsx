@@ -8,16 +8,19 @@ function Nav() {
         <ul className="flex justify-between items-center ">
           <li className="bg-black px-5 py-3 rounded-md w-[170px] text-center">
             <Link to="/Add" className="text-white text-base font-semibold">
-              Add Todo 
+              Add Todo
             </Link>
           </li>
           <li className="bg-black px-5 py-3 rounded-md w-[170px] text-center">
             <Link to="/Todo" className="text-white text-lg font-semibold">
-             All Todo
+              All Todo
             </Link>
           </li>
           <li className="bg-black px-5 py-3 rounded-md w-[170px] text-center">
-            <Link to="/Completedtodo" className="text-white text-base font-semibold">
+            <Link
+              to="/Completedtodo"
+              className="text-white text-base font-semibold"
+            >
               Completed Todo
             </Link>
           </li>

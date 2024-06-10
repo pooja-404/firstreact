@@ -1,23 +1,10 @@
-
-import React, { useState, useEffect } from "react";
-
-const Add = () => {
-  const [todos, setTodos] = useState([]);
+// src/AddTodo.js
+import React, { useState } from "react";
+const AddTodo = ({ addTodo }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-
-  useEffect(() => {
-    const savedTodos = localStorage.getItem("todos");
-    if (savedTodos) {
-      setTodos(JSON.parse(savedTodos));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -35,7 +22,7 @@ const Add = () => {
     setEndTime(e.target.value);
   };
 
-  const addTodo = () => {
+  const handleAddTodo = () => {
     if (
       title.trim() !== "" &&
       description.trim() !== "" &&
@@ -47,8 +34,9 @@ const Add = () => {
         description: description,
         startTime: startTime,
         endTime: endTime,
+        completed: false,
       };
-      setTodos([...todos, newTodo]);
+      addTodo(newTodo);
       setTitle("");
       setDescription("");
       setStartTime("");
@@ -57,12 +45,12 @@ const Add = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-8 p-4 bg-gray-100 text-center rounded-lg shadow-lg">
-      <h1 className="text-xl font-bold mb-4">Todo List</h1>
+    <div className="max-w-[500px] bg-black rounded-lg mt-24 py-4 px-3 mx-auto">
+      <h1 className="text-xl font-bold mb-4 text-white">Add Todo</h1>
       <div className="mb-4">
-        <label className="block text-gray-700 text-start">Title:</label>
+        <label className="block text-white text-start">Title:</label>
         <input
-          className="w-full border border-gray-300 rounded px-3 py-2 text-white"
+          className="w-full border border-gray-300 rounded px-3 py-2 text-black"
           type="text"
           value={title}
           onChange={handleTitleChange}
@@ -70,27 +58,27 @@ const Add = () => {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 text-start">Description:</label>
+        <label className="block text-white text-start">Description:</label>
         <textarea
-          className="w-full border border-gray-300 rounded px-3 py-2 text-white"
+          className="w-full border border-gray-300 rounded px-3 py-2 text-black"
           value={description}
           onChange={handleDescriptionChange}
           placeholder="Enter description"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 text-start">Start Time:</label>
+        <label className="block text-white text-start">Start Time:</label>
         <input
-          className="w-full border border-gray-300 rounded px-3 py-2 text-white"
+          className="w-full border border-gray-300 rounded px-3 py-2 text-black"
           type="datetime-local"
           value={startTime}
           onChange={handleStartTimeChange}
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 text-start">End Time:</label>
+        <label className="block text-white text-start">End Time:</label>
         <input
-          className="w-full border border-gray-300 rounded px-3 py-2 text-white"
+          className="w-full border border-gray-300 rounded px-3 py-2 text-black"
           type="datetime-local"
           value={endTime}
           onChange={handleEndTimeChange}
@@ -98,22 +86,12 @@ const Add = () => {
       </div>
       <button
         className="bg-[#8ff3f3] text-black text-lg font-medium px-4 py-2 rounded hover:bg-[#58cbcb]"
-        onClick={addTodo}
+        onClick={handleAddTodo}
       >
         Add Todo
       </button>
-      <ul className="mt-4">
-        {todos.map((todo, index) => (
-          <li key={index} className="border-b border-gray-300 py-4">
-            <h3 className="text-lg font-semibold">{todo.title}</h3>
-            <p className="text-gray-700">Description: {todo.description}</p>
-            <p className="text-gray-700">Start Time: {todo.startTime}</p>
-            <p className="text-gray-700">End Time: {todo.endTime}</p>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
 
-export default Add;
+export default AddTodo;
