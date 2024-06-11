@@ -1,6 +1,5 @@
-// src/components/AllTodos.jsx
-import React from "react";
 
+import React from "react";
 const AllTodos = ({ todos, markAsCompleted }) => {
   return (
     <div className="max-w-[1320px] px-3 mx-auto my-8">

@@ -1,46 +1,26 @@
-// src/AddTodo.js
 import React, { useState } from "react";
+
 const AddTodo = ({ addTodo }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    startTime: "",
+    endTime: ""
+  });
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const handleStartTimeChange = (e) => {
-    setStartTime(e.target.value);
-  };
-
-  const handleEndTimeChange = (e) => {
-    setEndTime(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleAddTodo = () => {
-    if (
-      title.trim() !== "" &&
-      description.trim() !== "" &&
-      startTime !== "" &&
-      endTime !== ""
-    ) {
-      const newTodo = {
-        title: title,
-        description: description,
-        startTime: startTime,
-        endTime: endTime,
-        completed: false,
-      };
-      addTodo(newTodo);
-      setTitle("");
-      setDescription("");
-      setStartTime("");
-      setEndTime("");
+    const { title, description, startTime, endTime } = formData;
+    if (title && description && startTime && endTime) {
+      addTodo({
+        ...formData,
+        completed: false
+      });
+      setFormData({ title: "", description: "", startTime: "", endTime: "" });
     }
   };
 
@@ -52,8 +32,9 @@ const AddTodo = ({ addTodo }) => {
         <input
           className="w-full border border-gray-300 rounded px-3 py-2 text-black"
           type="text"
-          value={title}
-          onChange={handleTitleChange}
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
           placeholder="Enter title"
         />
       </div>
@@ -61,8 +42,9 @@ const AddTodo = ({ addTodo }) => {
         <label className="block text-white text-start">Description:</label>
         <textarea
           className="w-full border border-gray-300 rounded px-3 py-2 text-black"
-          value={description}
-          onChange={handleDescriptionChange}
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
           placeholder="Enter description"
         />
       </div>
@@ -71,8 +53,9 @@ const AddTodo = ({ addTodo }) => {
         <input
           className="w-full border border-gray-300 rounded px-3 py-2 text-black"
           type="datetime-local"
-          value={startTime}
-          onChange={handleStartTimeChange}
+          name="startTime"
+          value={formData.startTime}
+          onChange={handleChange}
         />
       </div>
       <div className="mb-4">
@@ -80,8 +63,9 @@ const AddTodo = ({ addTodo }) => {
         <input
           className="w-full border border-gray-300 rounded px-3 py-2 text-black"
           type="datetime-local"
-          value={endTime}
-          onChange={handleEndTimeChange}
+          name="endTime"
+          value={formData.endTime}
+          onChange={handleChange}
         />
       </div>
       <button
